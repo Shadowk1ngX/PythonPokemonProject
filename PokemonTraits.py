@@ -133,6 +133,16 @@ def GenerateIvs():
         }
         return ivs
 
+def CreateEvsData():
+      return {
+            "Health": 0,
+            "Attack": 0,
+            "Defense": 0,
+            "SpAttack": 0,
+            "SpDefense": 0,
+            "Speed": 0
+        }
+
 def GenerateNature():
     return random.choice(list(Natures.keys()))
 

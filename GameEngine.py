@@ -14,7 +14,7 @@ def ensure_directory_exists(SaveParam):
 class Engine:
     def __init__(self,):
         self.GameMode = None
-        self.TextSpeed = 0.05
+        self.TextSpeed = 0.03
         self.Player = None
 
 

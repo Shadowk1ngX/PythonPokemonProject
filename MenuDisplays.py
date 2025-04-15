@@ -1,6 +1,7 @@
 import sys
 import time
 import os
+import PokemonData as Pokemon
 
 BoldText = "\033[1m"
 ResetText = "\033[0m"
@@ -293,3 +294,524 @@ def Display_Main_Menu(Game):
         case _:
             print(f"{TextColorList['RED']}Selection does not exist for: {TextColorList['RESET']}" + choice)
             Display_Main_Menu(Game)
+
+
+def Display_Starting_Pokemon(Game):
+    print(" 1: Bulbasaur")
+    print(" 2: Charmander")
+    print(" 3: Squirtle")
+    print(" 4: Pikachu")
+    print(" 5: Eevee")
+    print(" 6: Chikorita")
+    print(" 7: Cyndaquil")
+    print(" 8: Totodile")
+    print(" 9: Treecko")
+    print("10: Torchic")
+    print("11: Mudkip")
+    print("12: Turtwig")
+    print("13: Chimchar")
+    print("14: Piplup")
+    print("15: Snivy")
+    print("16: Tepig")
+    print("17: Oshawott")
+    print("18: Chespin")
+    print("19: Fennekin")
+    print("20: Froakie")
+    print("21: Rowlet")
+    print("22: Litten")
+    print("23: Popplio")
+    print("24: Grookey")
+    print("25: Scorbunny")
+    print("26: Sobble")
+    print("27: Cyndaquil")
+    print("28: Rowlet")
+    print("29: Oshawott")
+    print("30: Sprigatito")
+    print("31: Fuecoco")
+    print("32: Quaxly")
+
+
+    choice = input("Please enter the number next to your choice to display more info\n")
+
+    match choice:
+        case "1":
+            Game.ClearScreen()
+            Type_Text_Effect("Bulbasaur, a Grass/Poison seed type Pokémon with a bulb on its back that grows into a plant.", Game.TextSpeed)
+            time.sleep(1)
+            Type_Text_Effect("Would you like to choose this Pokémon? Enter Y or N...\n", Game.TextSpeed)
+            
+            choice2 = input()
+            match choice2:
+                case "Y"|"y":
+                    Game.Player.PlayerInventory.Add_Pokemon_To_Inventory(Pokemon.Bulbasaur)
+                    Type_Text_Effect("Great Choice! Now go out and catch them all!")
+                case "N"|"n":
+                    Display_Starting_Pokemon(Game)
+                case _:
+                    Type_Text_Effect("Please enter a valid responce...",Game.TextSpeed)
+                    Display_Starting_Pokemon(Game)
+        case "2":
+            Game.ClearScreen()
+            Type_Text_Effect("Charmander, a Fire type lizard Pokémon whose tail flame indicates its life .", Game.TextSpeed)
+            time.sleep(1)
+            Type_Text_Effect("Would you like to choose this Pokémon? Enter Y or N...\n", Game.TextSpeed)
+            
+            choice2 = input()
+            match choice2:
+                case "Y"|"y":
+                    Game.Player.PlayerInventory.Add_Pokemon_To_Inventory()
+                case "N"|"n":
+                    Display_Starting_Pokemon(Game)
+                case _:
+                    Type_Text_Effect("Please enter a valid responce...",Game.TextSpeed)
+                    Display_Starting_Pokemon(Game)           
+        case "3":
+            Game.ClearScreen()
+            Type_Text_Effect("Squirtle, a Water type pokemon. A tiny turtle Pokémon that sprays water to protect itself.", Game.TextSpeed)
+            time.sleep(1)
+            Type_Text_Effect("Would you like to choose this Pokémon? Enter Y or N...\n", Game.TextSpeed)
+            
+            choice2 = input()
+            match choice2:
+                case "Y"|"y":
+                    Game.Player.PlayerInventory.Add_Pokemon_To_Inventory()
+                case "N"|"n":
+                    Display_Starting_Pokemon(Game)
+                case _:
+                    Type_Text_Effect("Please enter a valid responce...",Game.TextSpeed)
+                    Display_Starting_Pokemon(Game)
+        case "4":
+            Game.ClearScreen()
+            Type_Text_Effect("Bulbasaur, a Grass/Poison seed type Pokémon with a bulb on its back that grows into a plant.", Game.TextSpeed)
+            time.sleep(1)
+            Type_Text_Effect("Would you like to choose this Pokémon? Enter Y or N...\n", Game.TextSpeed)
+            
+            choice2 = input()
+            match choice2:
+                case "Y"|"y":
+                    Game.Player.PlayerInventory.Add_Pokemon_To_Inventory()
+                case "N"|"n":
+                    Display_Starting_Pokemon(Game)
+                case _:
+                    Type_Text_Effect("Please enter a valid responce...",Game.TextSpeed)
+                    Display_Starting_Pokemon(Game)
+        case "5":
+            Game.ClearScreen()
+            Type_Text_Effect("Bulbasaur, a Grass/Poison seed type Pokémon with a bulb on its back that grows into a plant.", Game.TextSpeed)
+            time.sleep(1)
+            Type_Text_Effect("Would you like to choose this Pokémon? Enter Y or N...\n", Game.TextSpeed)
+            
+            choice2 = input()
+            match choice2:
+                case "Y"|"y":
+                    Game.Player.PlayerInventory.Add_Pokemon_To_Inventory()
+                case "N"|"n":
+                    Display_Starting_Pokemon(Game)
+                case _:
+                    Type_Text_Effect("Please enter a valid responce...",Game.TextSpeed)
+                    Display_Starting_Pokemon(Game)
+        case "6":
+            Game.ClearScreen()
+            Type_Text_Effect("Bulbasaur, a Grass/Poison seed type Pokémon with a bulb on its back that grows into a plant.", Game.TextSpeed)
+            time.sleep(1)
+            Type_Text_Effect("Would you like to choose this Pokémon? Enter Y or N...\n", Game.TextSpeed)
+            
+            choice2 = input()
+            match choice2:
+                case "Y"|"y":
+                    Game.Player.PlayerInventory.Add_Pokemon_To_Inventory()
+                case "N"|"n":
+                    Display_Starting_Pokemon(Game)
+                case _:
+                    Type_Text_Effect("Please enter a valid responce...",Game.TextSpeed)
+                    Display_Starting_Pokemon(Game)
+        case "7":
+            Game.ClearScreen()
+            Type_Text_Effect("Bulbasaur, a Grass/Poison seed type Pokémon with a bulb on its back that grows into a plant.", Game.TextSpeed)
+            time.sleep(1)
+            Type_Text_Effect("Would you like to choose this Pokémon? Enter Y or N...\n", Game.TextSpeed)
+            
+            choice2 = input()
+            match choice2:
+                case "Y"|"y":
+                    Game.Player.PlayerInventory.Add_Pokemon_To_Inventory()
+                case "N"|"n":
+                    Display_Starting_Pokemon(Game)
+                case _:
+                    Type_Text_Effect("Please enter a valid responce...",Game.TextSpeed)
+                    Display_Starting_Pokemon(Game)
+        case "8":
+            Game.ClearScreen()
+            Type_Text_Effect("Bulbasaur, a Grass/Poison seed type Pokémon with a bulb on its back that grows into a plant.", Game.TextSpeed)
+            time.sleep(1)
+            Type_Text_Effect("Would you like to choose this Pokémon? Enter Y or N...\n", Game.TextSpeed)
+            
+            choice2 = input()
+            match choice2:
+                case "Y"|"y":
+                    Game.Player.PlayerInventory.Add_Pokemon_To_Inventory()
+                case "N"|"n":
+                    Display_Starting_Pokemon(Game)
+                case _:
+                    Type_Text_Effect("Please enter a valid responce...",Game.TextSpeed)
+                    Display_Starting_Pokemon(Game)
+        case "9":
+            Game.ClearScreen()
+            Type_Text_Effect("Bulbasaur, a Grass/Poison seed type Pokémon with a bulb on its back that grows into a plant.", Game.TextSpeed)
+            time.sleep(1)
+            Type_Text_Effect("Would you like to choose this Pokémon? Enter Y or N...\n", Game.TextSpeed)
+            
+            choice2 = input()
+            match choice2:
+                case "Y"|"y":
+                    Game.Player.PlayerInventory.Add_Pokemon_To_Inventory()
+                case "N"|"n":
+                    Display_Starting_Pokemon(Game)
+                case _:
+                    Type_Text_Effect("Please enter a valid responce...",Game.TextSpeed)
+                    Display_Starting_Pokemon(Game)
+        case "10":
+            Game.ClearScreen()
+            Type_Text_Effect("Bulbasaur, a Grass/Poison seed type Pokémon with a bulb on its back that grows into a plant.", Game.TextSpeed)
+            time.sleep(1)
+            Type_Text_Effect("Would you like to choose this Pokémon? Enter Y or N...\n", Game.TextSpeed)
+            
+            choice2 = input()
+            match choice2:
+                case "Y"|"y":
+                    Game.Player.PlayerInventory.Add_Pokemon_To_Inventory()
+                case "N"|"n":
+                    Display_Starting_Pokemon(Game)
+                case _:
+                    Type_Text_Effect("Please enter a valid responce...",Game.TextSpeed)
+                    Display_Starting_Pokemon(Game)
+        case "11":
+            Game.ClearScreen()
+            Type_Text_Effect("Bulbasaur, a Grass/Poison seed type Pokémon with a bulb on its back that grows into a plant.", Game.TextSpeed)
+            time.sleep(1)
+            Type_Text_Effect("Would you like to choose this Pokémon? Enter Y or N...\n", Game.TextSpeed)
+            
+            choice2 = input()
+            match choice2:
+                case "Y"|"y":
+                    Game.Player.PlayerInventory.Add_Pokemon_To_Inventory()
+                case "N"|"n":
+                    Display_Starting_Pokemon(Game)
+                case _:
+                    Type_Text_Effect("Please enter a valid responce...",Game.TextSpeed)
+                    Display_Starting_Pokemon(Game)
+        case "12":
+            Game.ClearScreen()
+            Type_Text_Effect("Bulbasaur, a Grass/Poison seed type Pokémon with a bulb on its back that grows into a plant.", Game.TextSpeed)
+            time.sleep(1)
+            Type_Text_Effect("Would you like to choose this Pokémon? Enter Y or N...\n", Game.TextSpeed)
+            
+            choice2 = input()
+            match choice2:
+                case "Y"|"y":
+                    Game.Player.PlayerInventory.Add_Pokemon_To_Inventory()
+                case "N"|"n":
+                    Display_Starting_Pokemon(Game)
+                case _:
+                    Type_Text_Effect("Please enter a valid responce...",Game.TextSpeed)
+                    Display_Starting_Pokemon(Game)
+        case "13":
+            Game.ClearScreen()
+            Type_Text_Effect("Bulbasaur, a Grass/Poison seed type Pokémon with a bulb on its back that grows into a plant.", Game.TextSpeed)
+            time.sleep(1)
+            Type_Text_Effect("Would you like to choose this Pokémon? Enter Y or N...\n", Game.TextSpeed)
+            
+            choice2 = input()
+            match choice2:
+                case "Y"|"y":
+                    Game.Player.PlayerInventory.Add_Pokemon_To_Inventory()
+                case "N"|"n":
+                    Display_Starting_Pokemon(Game)
+                case _:
+                    Type_Text_Effect("Please enter a valid responce...",Game.TextSpeed)
+                    Display_Starting_Pokemon(Game)
+        case "14":
+            Game.ClearScreen()
+            Type_Text_Effect("Bulbasaur, a Grass/Poison seed type Pokémon with a bulb on its back that grows into a plant.", Game.TextSpeed)
+            time.sleep(1)
+            Type_Text_Effect("Would you like to choose this Pokémon? Enter Y or N...\n", Game.TextSpeed)
+            
+            choice2 = input()
+            match choice2:
+                case "Y"|"y":
+                    Game.Player.PlayerInventory.Add_Pokemon_To_Inventory()
+                case "N"|"n":
+                    Display_Starting_Pokemon(Game)
+                case _:
+                    Type_Text_Effect("Please enter a valid responce...",Game.TextSpeed)
+                    Display_Starting_Pokemon(Game)
+        case "15":
+            Game.ClearScreen()
+            Type_Text_Effect("Bulbasaur, a Grass/Poison seed type Pokémon with a bulb on its back that grows into a plant.", Game.TextSpeed)
+            time.sleep(1)
+            Type_Text_Effect("Would you like to choose this Pokémon? Enter Y or N...\n", Game.TextSpeed)
+            
+            choice2 = input()
+            match choice2:
+                case "Y"|"y":
+                    Game.Player.PlayerInventory.Add_Pokemon_To_Inventory()
+                case "N"|"n":
+                    Display_Starting_Pokemon(Game)
+                case _:
+                    Type_Text_Effect("Please enter a valid responce...",Game.TextSpeed)
+                    Display_Starting_Pokemon(Game)
+        case "16":
+            Game.ClearScreen()
+            Type_Text_Effect("Bulbasaur, a Grass/Poison seed type Pokémon with a bulb on its back that grows into a plant.", Game.TextSpeed)
+            time.sleep(1)
+            Type_Text_Effect("Would you like to choose this Pokémon? Enter Y or N...\n", Game.TextSpeed)
+            
+            choice2 = input()
+            match choice2:
+                case "Y"|"y":
+                    Game.Player.PlayerInventory.Add_Pokemon_To_Inventory()
+                case "N"|"n":
+                    Display_Starting_Pokemon(Game)
+                case _:
+                    Type_Text_Effect("Please enter a valid responce...",Game.TextSpeed)
+                    Display_Starting_Pokemon(Game)
+        case "17":
+            Game.ClearScreen()
+            Type_Text_Effect("Bulbasaur, a Grass/Poison seed type Pokémon with a bulb on its back that grows into a plant.", Game.TextSpeed)
+            time.sleep(1)
+            Type_Text_Effect("Would you like to choose this Pokémon? Enter Y or N...\n", Game.TextSpeed)
+            
+            choice2 = input()
+            match choice2:
+                case "Y"|"y":
+                    Game.Player.PlayerInventory.Add_Pokemon_To_Inventory()
+                case "N"|"n":
+                    Display_Starting_Pokemon(Game)
+                case _:
+                    Type_Text_Effect("Please enter a valid responce...",Game.TextSpeed)
+                    Display_Starting_Pokemon(Game)
+        case "18":
+            Game.ClearScreen()
+            Type_Text_Effect("Bulbasaur, a Grass/Poison seed type Pokémon with a bulb on its back that grows into a plant.", Game.TextSpeed)
+            time.sleep(1)
+            Type_Text_Effect("Would you like to choose this Pokémon? Enter Y or N...\n", Game.TextSpeed)
+            
+            choice2 = input()
+            match choice2:
+                case "Y"|"y":
+                    Game.Player.PlayerInventory.Add_Pokemon_To_Inventory()
+                case "N"|"n":
+                    Display_Starting_Pokemon(Game)
+                case _:
+                    Type_Text_Effect("Please enter a valid responce...",Game.TextSpeed)
+                    Display_Starting_Pokemon(Game)
+        case "19":
+            Game.ClearScreen()
+            Type_Text_Effect("Bulbasaur, a Grass/Poison seed type Pokémon with a bulb on its back that grows into a plant.", Game.TextSpeed)
+            time.sleep(1)
+            Type_Text_Effect("Would you like to choose this Pokémon? Enter Y or N...\n", Game.TextSpeed)
+            
+            choice2 = input()
+            match choice2:
+                case "Y"|"y":
+                    Game.Player.PlayerInventory.Add_Pokemon_To_Inventory()
+                case "N"|"n":
+                    Display_Starting_Pokemon(Game)
+                case _:
+                    Type_Text_Effect("Please enter a valid responce...",Game.TextSpeed)
+                    Display_Starting_Pokemon(Game)
+        case "20":
+            Game.ClearScreen()
+            Type_Text_Effect("Bulbasaur, a Grass/Poison seed type Pokémon with a bulb on its back that grows into a plant.", Game.TextSpeed)
+            time.sleep(1)
+            Type_Text_Effect("Would you like to choose this Pokémon? Enter Y or N...\n", Game.TextSpeed)
+            
+            choice2 = input()
+            match choice2:
+                case "Y"|"y":
+                    Game.Player.PlayerInventory.Add_Pokemon_To_Inventory()
+                case "N"|"n":
+                    Display_Starting_Pokemon(Game)
+                case _:
+                    Type_Text_Effect("Please enter a valid responce...",Game.TextSpeed)
+                    Display_Starting_Pokemon(Game)
+        case "21":
+            Game.ClearScreen()
+            Type_Text_Effect("Bulbasaur, a Grass/Poison seed type Pokémon with a bulb on its back that grows into a plant.", Game.TextSpeed)
+            time.sleep(1)
+            Type_Text_Effect("Would you like to choose this Pokémon? Enter Y or N...\n", Game.TextSpeed)
+            
+            choice2 = input()
+            match choice2:
+                case "Y"|"y":
+                    Game.Player.PlayerInventory.Add_Pokemon_To_Inventory()
+                case "N"|"n":
+                    Display_Starting_Pokemon(Game)
+                case _:
+                    Type_Text_Effect("Please enter a valid responce...",Game.TextSpeed)
+                    Display_Starting_Pokemon(Game)
+        case "22":
+            Game.ClearScreen()
+            Type_Text_Effect("Bulbasaur, a Grass/Poison seed type Pokémon with a bulb on its back that grows into a plant.", Game.TextSpeed)
+            time.sleep(1)
+            Type_Text_Effect("Would you like to choose this Pokémon? Enter Y or N...\n", Game.TextSpeed)
+            
+            choice2 = input()
+            match choice2:
+                case "Y"|"y":
+                    Game.Player.PlayerInventory.Add_Pokemon_To_Inventory()
+                case "N"|"n":
+                    Display_Starting_Pokemon(Game)
+                case _:
+                    Type_Text_Effect("Please enter a valid responce...",Game.TextSpeed)
+                    Display_Starting_Pokemon(Game)
+        case "23":
+            Game.ClearScreen()
+            Type_Text_Effect("Bulbasaur, a Grass/Poison seed type Pokémon with a bulb on its back that grows into a plant.", Game.TextSpeed)
+            time.sleep(1)
+            Type_Text_Effect("Would you like to choose this Pokémon? Enter Y or N...\n", Game.TextSpeed)
+            
+            choice2 = input()
+            match choice2:
+                case "Y"|"y":
+                    Game.Player.PlayerInventory.Add_Pokemon_To_Inventory()
+                case "N"|"n":
+                    Display_Starting_Pokemon(Game)
+                case _:
+                    Type_Text_Effect("Please enter a valid responce...",Game.TextSpeed)
+                    Display_Starting_Pokemon(Game)
+        case "24":
+            Game.ClearScreen()
+            Type_Text_Effect("Bulbasaur, a Grass/Poison seed type Pokémon with a bulb on its back that grows into a plant.", Game.TextSpeed)
+            time.sleep(1)
+            Type_Text_Effect("Would you like to choose this Pokémon? Enter Y or N...\n", Game.TextSpeed)
+            
+            choice2 = input()
+            match choice2:
+                case "Y"|"y":
+                    Game.Player.PlayerInventory.Add_Pokemon_To_Inventory()
+                case "N"|"n":
+                    Display_Starting_Pokemon(Game)
+                case _:
+                    Type_Text_Effect("Please enter a valid responce...",Game.TextSpeed)
+                    Display_Starting_Pokemon(Game)
+        case "25":
+            Game.ClearScreen()
+            Type_Text_Effect("Bulbasaur, a Grass/Poison seed type Pokémon with a bulb on its back that grows into a plant.", Game.TextSpeed)
+            time.sleep(1)
+            Type_Text_Effect("Would you like to choose this Pokémon? Enter Y or N...\n", Game.TextSpeed)
+            
+            choice2 = input()
+            match choice2:
+                case "Y"|"y":
+                    Game.Player.PlayerInventory.Add_Pokemon_To_Inventory()
+                case "N"|"n":
+                    Display_Starting_Pokemon(Game)
+                case _:
+                    Type_Text_Effect("Please enter a valid responce...",Game.TextSpeed)
+                    Display_Starting_Pokemon(Game)
+        case "26":
+            Game.ClearScreen()
+            Type_Text_Effect("Bulbasaur, a Grass/Poison seed type Pokémon with a bulb on its back that grows into a plant.", Game.TextSpeed)
+            time.sleep(1)
+            Type_Text_Effect("Would you like to choose this Pokémon? Enter Y or N...\n", Game.TextSpeed)
+            
+            choice2 = input()
+            match choice2:
+                case "Y"|"y":
+                    Game.Player.PlayerInventory.Add_Pokemon_To_Inventory()
+                case "N"|"n":
+                    Display_Starting_Pokemon(Game)
+                case _:
+                    Type_Text_Effect("Please enter a valid responce...",Game.TextSpeed)
+                    Display_Starting_Pokemon(Game)
+        case "27":
+            Game.ClearScreen()
+            Type_Text_Effect("Bulbasaur, a Grass/Poison seed type Pokémon with a bulb on its back that grows into a plant.", Game.TextSpeed)
+            time.sleep(1)
+            Type_Text_Effect("Would you like to choose this Pokémon? Enter Y or N...\n", Game.TextSpeed)
+            
+            choice2 = input()
+            match choice2:
+                case "Y"|"y":
+                    Game.Player.PlayerInventory.Add_Pokemon_To_Inventory()
+                case "N"|"n":
+                    Display_Starting_Pokemon(Game)
+                case _:
+                    Type_Text_Effect("Please enter a valid responce...",Game.TextSpeed)
+                    Display_Starting_Pokemon(Game)
+        case "28":
+            Game.ClearScreen()
+            Type_Text_Effect("Bulbasaur, a Grass/Poison seed type Pokémon with a bulb on its back that grows into a plant.", Game.TextSpeed)
+            time.sleep(1)
+            Type_Text_Effect("Would you like to choose this Pokémon? Enter Y or N...\n", Game.TextSpeed)
+            
+            choice2 = input()
+            match choice2:
+                case "Y"|"y":
+                    Game.Player.PlayerInventory.Add_Pokemon_To_Inventory()
+                case "N"|"n":
+                    Display_Starting_Pokemon(Game)
+                case _:
+                    Type_Text_Effect("Please enter a valid responce...",Game.TextSpeed)
+                    Display_Starting_Pokemon(Game)
+        case "29":
+            Game.ClearScreen()
+            Type_Text_Effect("Bulbasaur, a Grass/Poison seed type Pokémon with a bulb on its back that grows into a plant.", Game.TextSpeed)
+            time.sleep(1)
+            Type_Text_Effect("Would you like to choose this Pokémon? Enter Y or N...\n", Game.TextSpeed)
+            
+            choice2 = input()
+            match choice2:
+                case "Y"|"y":
+                    Game.Player.PlayerInventory.Add_Pokemon_To_Inventory()
+                case "N"|"n":
+                    Display_Starting_Pokemon(Game)
+                case _:
+                    Type_Text_Effect("Please enter a valid responce...",Game.TextSpeed)
+                    Display_Starting_Pokemon(Game)
+        case "30":
+            Game.ClearScreen()
+            Type_Text_Effect("Bulbasaur, a Grass/Poison seed type Pokémon with a bulb on its back that grows into a plant.", Game.TextSpeed)
+            time.sleep(1)
+            Type_Text_Effect("Would you like to choose this Pokémon? Enter Y or N...\n", Game.TextSpeed)
+            
+            choice2 = input()
+            match choice2:
+                case "Y"|"y":
+                    Game.Player.PlayerInventory.Add_Pokemon_To_Inventory()
+                case "N"|"n":
+                    Display_Starting_Pokemon(Game)
+                case _:
+                    Type_Text_Effect("Please enter a valid responce...",Game.TextSpeed)
+                    Display_Starting_Pokemon(Game)
+        case "31":
+            Game.ClearScreen()
+            Type_Text_Effect("Bulbasaur, a Grass/Poison seed type Pokémon with a bulb on its back that grows into a plant.", Game.TextSpeed)
+            time.sleep(1)
+            Type_Text_Effect("Would you like to choose this Pokémon? Enter Y or N...\n", Game.TextSpeed)
+            
+            choice2 = input()
+            match choice2:
+                case "Y"|"y":
+                    Game.Player.PlayerInventory.Add_Pokemon_To_Inventory()
+                case "N"|"n":
+                    Display_Starting_Pokemon(Game)
+                case _:
+                    Type_Text_Effect("Please enter a valid responce...",Game.TextSpeed)
+                    Display_Starting_Pokemon(Game)
+        case "32":
+            Game.ClearScreen()
+            Type_Text_Effect("Bulbasaur, a Grass/Poison seed type Pokémon with a bulb on its back that grows into a plant.", Game.TextSpeed)
+            time.sleep(1)
+            Type_Text_Effect("Would you like to choose this Pokémon? Enter Y or N...\n", Game.TextSpeed)
+            
+            choice2 = input()
+            match choice2:
+                case "Y"|"y":
+                    Game.Player.PlayerInventory.Add_Pokemon_To_Inventory()
+                case "N"|"n":
+                    Display_Starting_Pokemon(Game)
+                case _:
+                    Type_Text_Effect("Please enter a valid responce...",Game.TextSpeed)
+                    Display_Starting_Pokemon(Game)    

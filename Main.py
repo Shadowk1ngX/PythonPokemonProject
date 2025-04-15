@@ -4,6 +4,8 @@ import MenuDisplays
 import TypeingTextEffect
 import os
 import re
+import time
+import Gui
 
 def ensure_directory_exists(SaveParam):
     if SaveParam == "SavePath":
@@ -11,7 +13,6 @@ def ensure_directory_exists(SaveParam):
         game_data_path = os.path.join(appdata_local, "PokemonTextAdventures", "Data")
         os.makedirs(game_data_path, exist_ok=True)
         return game_data_path
-
 
 Game = Engine()
 
@@ -37,4 +38,6 @@ while True:
 
         TypeingTextEffect.Type_Text_Effect("Welcome to Pokemon Text Adventures! Get ready for an exciting journey with your favorite Pokemon!",Game.TextSpeed)
         TypeingTextEffect.Type_Text_Effect("Firstly, you need to choose a starting pokemon!",Game.TextSpeed)
-        
+        time.sleep(.5)
+        MenuDisplays.Display_Starting_Pokemon(Game)
+        Gui.StartMain(Game)

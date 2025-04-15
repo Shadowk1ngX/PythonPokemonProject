@@ -8,6 +8,7 @@ class Inventory:
         self.PlayerInventory = Backpack
         self.MaxInventory = MaxInventorySlots
         self.CurrentlyUsedSlots = CurrentSlotsTaken
+        self.EquippedPokemon = None
 
 
     def Get_Inventory(self):
@@ -22,5 +23,10 @@ class Inventory:
                 continue
         return False
        
-
+    def Add_Pokemon_To_Inventory(self, Pokemon):
+        if self.CurrentlyUsedSlots < self.MaxInventory:
+            self.CurrentlyUsedSlots += 1
+            self.PlayerInventory.append(Pokemon)
+            if self.CurrentlyUsedSlots == 1:
+                self.EquippedPokemon = Pokemon
     
