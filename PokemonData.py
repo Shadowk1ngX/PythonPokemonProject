@@ -1,11 +1,12 @@
-import PokemonType as PokemonType
+import PokemonType as PokeTypes
 import PokemonTraits as PokeTraits
+import PokemonMoves as PokeMoves
 import random
 
 
 
 class Pokemon:
-    def __init__(self,name,base_max_health,base_attack,base_defense,base_sp_attack,base_sp_defense,base_speed,poke_id,level,catch_rate,base_exp,current_exp,egg_cycle,shiny,growth_rate,poke_type,description,gender):
+    def __init__(self,name,base_max_health,base_attack,base_defense,base_sp_attack,base_sp_defense,base_speed,poke_id,level,catch_rate,base_exp,current_exp,egg_cycle,shiny,growth_rate,poke_type,gender,moves,description):
         self.Name = name
         self.BaseMaxHealth = base_max_health
         self.BaseAttack = base_attack
@@ -13,7 +14,6 @@ class Pokemon:
         self.BaseSpAttack = base_sp_attack
         self.BaseSpDefense = base_sp_defense
         self.BaseSpeed = base_speed
-        base_exp
         self.PokeId = poke_id
         self.BaseExp = base_exp
         self.CurrentExp = current_exp
@@ -36,6 +36,7 @@ class Pokemon:
         self.SpAttack = self.CalculateNewStat(base_sp_attack,self.Ivs["SpAttack"],self.Evs["SpAttack"],self.Level,"SpAttack")
         self.SpDefense = self.CalculateNewStat(base_sp_defense,self.Ivs["SpDefense"],self.Evs["SpDefense"],self.Level,"SpDefense")
         self.Speed = self.CalculateNewStat(base_speed,self.Ivs["Speed"],self.Evs["Speed"],self.Level,"Speed")
+        self.Moves = moves
 
     def GetGrowthRateMultiplier(self, RateType):
         if RateType == "Fluctuating":
@@ -65,7 +66,6 @@ class Pokemon:
         NewStat = round((((2 * BaseStat + IV + (EV / 4)) * Level) / 100 + 5) * NatureModifier)
         return NewStat
     
-
     def LevelUp(self):
         #Should have made stats a dict so i could loop though them instead
         self.Level += 1
@@ -76,8 +76,6 @@ class Pokemon:
         self.SpAttack = self.CalculateNewStat(self.BaseSpAttack,self.Ivs["SpAttack"],self.Evs["SpAttack"],self.Level,"SpAttack")
         self.SpDefense = self.CalculateNewStat(self.BaseSpDefense,self.Ivs["SpDefense"],self.Evs["SpDefense"],self.Level,"SpDefense")
         self.Speed = self.CalculateNewStat(self.BaseSpeed,self.Ivs["Speed"],self.Evs["Speed"],self.Level,"Speed")     
-
-
 
     def __str__(self):
         PokeTypeString = ""
@@ -124,12 +122,13 @@ class Bulbasaur(Pokemon):
         egg_cycle = 20,
         shiny = random.randint(1,4096) == 1 or False,
         growth_rate= "Medium-Slow",
-        poke_type = [PokemonType.Grass,PokemonType.Poison],
+        poke_type = [PokeTypes.Grass,PokeTypes.Poison],
         gender= PokeTraits.GenerateGender(1,7),
+        moves = [PokeMoves.Tackle, PokeMoves.Growl],
         description= "Bulbasaur is a small, quadrupedal, amphibian Pokémon with blue-green skin and darker spots. It has red eyes, a wide mouth, and pointed, ear-like structures on top of its head. A notable feature is the plant bulb on its back, which is present from birth. This bulb grows alongside Bulbasaur, absorbing sunlight to provide energy through photosynthesis. This process allows Bulbasaur to sustain itself without food for extended periods.",
         )
         
 
 
 
-PokemonList = [Bulbasaur]
+PokemonList = [Bulbasaur] #For wild pokemon

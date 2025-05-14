@@ -1,6 +1,7 @@
 import tkinter as tk
 import random
 import PokemonData
+import PokemonBattleHandler as BattleHandler
 
 Inbattle = False
 
@@ -89,10 +90,14 @@ def StartPokemonBattleGui(Game):
     EnemyPokemon = PickedEnemyPokemon()
     EnemyName = EnemyPokemon.Name
 
+    Player = Game.Player
+    PlayerPokemon = Player.PlayerInventory.EquippedPokemon()
+    
+
     opponent_name = tk.Label(top_frame, text=f"🌿 Wild {EnemyName}", font=("Arial", 12, "bold"))
     opponent_name.pack()
 
-    player_name = tk.Label(top_frame, text="🔥 You sent out Bulbasaur!", font=("Arial", 12))
+    player_name = tk.Label(top_frame, text=f"🔥 You sent out {PlayerPokemon.Name}!", font=("Arial", 12))
     player_name.pack()
 
     battle_log = tk.Text(battle_win, height=8, width=45, state="disabled", bg="#f4f4f4")
@@ -117,26 +122,46 @@ def StartPokemonBattleGui(Game):
         for widget in move_frame.winfo_children():
             widget.destroy()
 
-        log("Choose a move:")
+        #log("Choose a move:")
 
-        moves = ["Tackle", "Growl", "Vine Whip", "Leech Seed"]
+        moves = PlayerPokemon.Moves
 
-        def make_move_command(move_name):
+        def make_move_command(move): # Get speed
             def action():
-                log(f"Bulbasaur used {move_name}!")
+                #log(f"{PlayerPokemon.Name} used {move.Name}!")
                 for widget in move_frame.winfo_children():
                     widget.destroy()
                 
-                # ✅ Show main buttons above move buttons
+                btn_frame.pack_forget()
+                btn_frame.pack(pady=5, before=move_frame)
+                battle_win.update_idletasks()
+
+                BattleHandler.HandleAttackTurn(Game,PlayerPokemon,move,EnemyPokemon)
+
+            return action
+        
+        def return_to_defualt_Menu():
+            def action():
+                for widget in move_frame.winfo_children():
+                    widget.destroy()
+                
                 btn_frame.pack_forget()
                 btn_frame.pack(pady=5, before=move_frame)
                 battle_win.update_idletasks()
 
             return action
-
+        
+        MoveInfoTracker = 0
         for i, move in enumerate(moves):
-            btn = tk.Button(move_frame, text=move, width=15, command=make_move_command(move))
+            move = move()
+            btn = tk.Button(move_frame, text=move.Name, width=15, command=make_move_command(move))
             btn.grid(row=i // 2, column=i % 2, padx=5, pady=3)
+            MoveInfoTracker = i + 1
+
+        btn = tk.Button(move_frame, text="Back", width=15, command=return_to_defualt_Menu())
+        btn.grid(row=MoveInfoTracker // 2, column=MoveInfoTracker % 2, padx=5, pady=3)
+
+
 
     def on_bag():
         log("You looked in your bag. It's empty!")

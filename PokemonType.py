@@ -28,8 +28,7 @@ Effectiveness = {
         ("Grass", "Fire"): .5,
         ("Grass", "Grass"): .5,
         ("Grass", "Dragon"): .5,
-        
-        
+          
     }   
 
 

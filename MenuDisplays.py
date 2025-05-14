@@ -344,7 +344,7 @@ def Display_Starting_Pokemon(Game):
             match choice2:
                 case "Y"|"y":
                     Game.Player.PlayerInventory.Add_Pokemon_To_Inventory(Pokemon.Bulbasaur)
-                    Type_Text_Effect("Great Choice! Now go out and catch them all!")
+                    Type_Text_Effect("Great Choice! Now go out and catch them all!",Game.TextSpeed)
                 case "N"|"n":
                     Display_Starting_Pokemon(Game)
                 case _:

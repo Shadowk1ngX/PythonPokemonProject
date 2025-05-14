@@ -22,7 +22,7 @@ while True:
     if Game.GameMode == "New":
         TypeingTextEffect.Type_Text_Effect("Welcome adventurer!", Game.TextSpeed)
         TypeingTextEffect.Type_Text_Effect("\nWhat is your name?", Game.TextSpeed)
-        AbsPath = ensure_directory_exists("SavePath")
+        AbsPath = ensure_directory_exists("SavePath")   
         PlayerName = input("\n")
 
         while not bool(re.match("^[A-Za-z]+$", PlayerName)):
