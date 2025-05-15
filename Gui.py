@@ -1,9 +1,24 @@
 import tkinter as tk
+from tkinter import ttk
 import random
 import PokemonData
 import PokemonBattleHandler as BattleHandler
 
 Inbattle = False
+PlayerHealthBar = ""
+PlayerHealthLabel = ""
+EnemyHealthBar = ""
+EnemyHealthLabel = ""
+
+def UpdateHealthBar(PlayerPokemon,EnemyPokemon):
+    PlayerPokemon.Health = max(0, PlayerPokemon.Health)
+    PlayerHealthBar["value"] = PlayerPokemon.Health
+    PlayerHealthLabel.config(text=f"HP: {PlayerPokemon.Health}/{PlayerPokemon.MaxHealth}")
+
+    EnemyPokemon.Health = max(0, EnemyPokemon.Health)
+    EnemyHealthBar["value"] = EnemyPokemon.Health
+    EnemyHealthLabel.config(text=f"HP: {EnemyPokemon.Health}/{EnemyPokemon.MaxHealth}")
+
 
 def StartMain(Game):
     TILE_SIZE = 50
@@ -69,7 +84,7 @@ def StartPokemonBattleGui(Game):
 
     battle_win = tk.Toplevel()
     battle_win.title("Pokémon Battle")
-    battle_win.geometry("400x300")
+    battle_win.geometry("400x400")
     battle_win.resizable(False, False)
     battle_win.attributes("-topmost", True)
 
@@ -91,14 +106,38 @@ def StartPokemonBattleGui(Game):
     EnemyName = EnemyPokemon.Name
 
     Player = Game.Player
-    PlayerPokemon = Player.PlayerInventory.EquippedPokemon()
+    PlayerPokemon = Player.PlayerInventory.EquippedPokemon
     
 
     opponent_name = tk.Label(top_frame, text=f"🌿 Wild {EnemyName}", font=("Arial", 12, "bold"))
-    opponent_name.pack()
+    #opponent_name.pack()
+    opponent_name.grid(row=0, column=1, sticky="w")
+    enemy_health_label = tk.Label(top_frame, text=f"HP: {EnemyPokemon.Health}/{EnemyPokemon.MaxHealth}")
+    enemy_health_label.grid(row=1, column=1, sticky="w")
+    enemy_health_bar = ttk.Progressbar(top_frame, length=200, maximum=EnemyPokemon.MaxHealth)
+    enemy_health_bar.grid(row=2, column=1, pady=(0, 10))
+    enemy_health_bar["value"] = EnemyPokemon.Health
 
     player_name = tk.Label(top_frame, text=f"🔥 You sent out {PlayerPokemon.Name}!", font=("Arial", 12))
-    player_name.pack()
+    #player_name.pack()
+    player_name.grid(row=0, column=0, sticky="e")
+    player_health_label = tk.Label(top_frame, text=f"HP: {PlayerPokemon.Health}/{PlayerPokemon.MaxHealth}")
+    player_health_label.grid(row=1, column=0, sticky="e")
+    player_health_bar = ttk.Progressbar(top_frame, length=200, maximum=PlayerPokemon.MaxHealth)
+    player_health_bar.grid(row=2, column=0, pady=(0, 10))
+    player_health_bar["value"] = PlayerPokemon.Health
+
+    global PlayerHealthBar
+    global PlayerHealthLabel
+    PlayerHealthBar = player_health_bar
+    PlayerHealthLabel = player_health_label
+
+    global EnemyHealthBar
+    global EnemyHealthLabel
+
+    EnemyHealthBar = enemy_health_bar
+    EnemyHealthLabel = enemy_health_label
+
 
     battle_log = tk.Text(battle_win, height=8, width=45, state="disabled", bg="#f4f4f4")
     battle_log.pack(pady=10)
@@ -115,6 +154,21 @@ def StartPokemonBattleGui(Game):
 
     btn_frame.pack(pady=5)
     move_frame.pack(pady=5)
+
+    def on_bag():
+        log("You looked in your bag. It's empty!")
+
+    def on_run():
+        log("You ran away safely.")
+        global Inbattle
+        Inbattle = False
+        battle_win.after(1000, battle_win.destroy)
+
+    def on_wild_win():
+        log(f"You defeated a wild {EnemyName}!.") #Add exp awarded
+        global Inbattle
+        Inbattle = False
+        battle_win.after(1000, battle_win.destroy)
 
     # === Button Actions ===
     def on_fight():
@@ -136,7 +190,7 @@ def StartPokemonBattleGui(Game):
                 btn_frame.pack(pady=5, before=move_frame)
                 battle_win.update_idletasks()
 
-                BattleHandler.HandleAttackTurn(Game,PlayerPokemon,move,EnemyPokemon)
+                BattleHandler.HandleAttackTurn(Game,PlayerPokemon,move,player_health_bar,player_health_label,EnemyPokemon,enemy_health_bar,enemy_health_label, on_wild_win)
 
             return action
         
@@ -163,14 +217,7 @@ def StartPokemonBattleGui(Game):
 
 
 
-    def on_bag():
-        log("You looked in your bag. It's empty!")
-
-    def on_run():
-        log("You ran away safely.")
-        global Inbattle
-        Inbattle = False
-        battle_win.after(1000, battle_win.destroy)
+    
 
     # === Main Buttons ===
     tk.Button(btn_frame, text="Fight", width=10, command=on_fight).grid(row=0, column=0, padx=5, pady=5)

@@ -31,6 +31,7 @@ class Pokemon:
         self.Evs = PokeTraits.CreateEvsData()
         self.MaxHealth = self.CalculateNewStat(base_max_health,self.Ivs["Health"],self.Evs["Health"],self.Level,"Health")
         self.Health = self.MaxHealth
+        self.ExpToNextLevel = self.CalculateExpToNextLevel()
         self.Attack = self.CalculateNewStat(base_attack,self.Ivs["Attack"],self.Evs["Attack"],self.Level,"Attack")
         self.Defense = self.CalculateNewStat(base_defense,self.Ivs["Defense"],self.Evs["Defense"],self.Level,"Defense")
         self.SpAttack = self.CalculateNewStat(base_sp_attack,self.Ivs["SpAttack"],self.Evs["SpAttack"],self.Level,"SpAttack")
@@ -66,8 +67,39 @@ class Pokemon:
         NewStat = round((((2 * BaseStat + IV + (EV / 4)) * Level) / 100 + 5) * NatureModifier)
         return NewStat
     
+    def CalculateExpToNextLevel(self):
+        level = self.Level + 1
+        if self.GrowthRate == "Fast":
+            return int(4 * (level ** 3) / 5)
+        elif self.GrowthRate == "Medium-Fast":
+            return int(level ** 3)
+        elif self.GrowthRate == "Medium-Slow":
+            return int(1.2 * (level ** 3) - 15 * (level ** 2) + 100 * level - 140)
+        elif self.GrowthRate == "Slow":
+            return int(5 * (level ** 3) / 4)
+        elif self.GrowthRate == "Erratic":
+            if level <= 50:
+                return int((level ** 3) * (100 - level) / 50)
+            elif level <= 68:
+                return int((level ** 3) * (150 - level) / 100)
+            elif level <= 98:
+                return int((level ** 3) * ((1911 - 10 * level) / 3) / 500)
+            else:
+                return int((level ** 3) * (160 - level) / 100)
+        elif self.GrowthRate == "Fluctuating":
+            if level <= 15:
+                return int((level ** 3) * ((level + 1) / 3 + 24) / 50)
+            elif level <= 36:
+                return int((level ** 3) * (level + 14) / 50)
+            else:
+                return int((level ** 3) * ((level / 2) + 32) / 50)
+        else:
+            return int(level ** 3)  # Default to Medium-Fast
+
+    
     def LevelUp(self):
         #Should have made stats a dict so i could loop though them instead
+        print("LEVEL UP!")
         self.Level += 1
         self.MaxHealth = self.CalculateNewStat(self.BaseMaxHealth,self.Ivs["Health"],self.Evs["Health"],self.Level,"Health")
         self.Health = self.MaxHealth
@@ -75,7 +107,59 @@ class Pokemon:
         self.Defense = self.CalculateNewStat(self.BaseDefense,self.Ivs["Defense"],self.Evs["Defense"],self.Level,"Defense")
         self.SpAttack = self.CalculateNewStat(self.BaseSpAttack,self.Ivs["SpAttack"],self.Evs["SpAttack"],self.Level,"SpAttack")
         self.SpDefense = self.CalculateNewStat(self.BaseSpDefense,self.Ivs["SpDefense"],self.Evs["SpDefense"],self.Level,"SpDefense")
-        self.Speed = self.CalculateNewStat(self.BaseSpeed,self.Ivs["Speed"],self.Evs["Speed"],self.Level,"Speed")     
+        self.Speed = self.CalculateNewStat(self.BaseSpeed,self.Ivs["Speed"],self.Evs["Speed"],self.Level,"Speed") 
+        self.ExpToNextLevel = self.CalculateExpToNextLevel()    
+
+    def TakeDamage(self, EnemyPokemon, EnemyAttack):
+
+        STABMultiplier = 1
+        TypeEffctivenessMultiplier = PokeTypes.GetEffectivenessMulitpier(EnemyAttack.Type, self.PokeType)
+        RandomMultiplier = random.uniform(0.85,1.00)
+
+        for ClassType in self.PokeType:
+            Type = ClassType().PokeType
+            if EnemyAttack.Type == Type:
+                print("Type match!")
+                STABMultiplier = 1.5
+                break
+
+        
+        if EnemyAttack.Category == "Physical":
+            Damage = (((2 * EnemyPokemon.Level / 5+2) * EnemyAttack.Power * (EnemyPokemon.Attack / self.Defense)) / 50 + 2 ) * STABMultiplier * TypeEffctivenessMultiplier * RandomMultiplier
+        elif EnemyAttack.Category == "Special":
+            Damage = (((2 * EnemyPokemon.Level / 5+2) * EnemyAttack.Power * (EnemyPokemon.SpAttack / self.SpDefense)) / 50 + 2 ) * STABMultiplier * TypeEffctivenessMultiplier * RandomMultiplier
+        else:
+            print("Handle status attack")
+            Damage = 0
+
+        if Damage == 0:
+            print("NO DAMAGE")
+            return True
+        
+        print(f"Calculated Damage: {Damage}")
+        self.Health -= Damage
+        if self.Health <= 0:
+            return False#Choose true or false for death
+        return True
+    
+    def AddExp(self, Amount):
+        self.CurrentExp += Amount
+        while self.CurrentExp >= self.ExpToNextLevel:
+            self.CurrentExp -= self.ExpToNextLevel
+            self.LevelUp()
+
+    def CalculateExpReward(self, base_exp, defeated_level, receiver_level, is_trainer_battle=False): #is_traded=False, has_lucky_egg=False, has_affection=False):
+        
+        term1 = (base_exp * defeated_level) / 5
+        level_factor = ((2 * defeated_level + 10) / (defeated_level + receiver_level + 10)) ** 2.5
+        exp = (term1 * level_factor) + 1  # +1 is added to round up small amounts
+
+        if is_trainer_battle:
+            exp *= 1.5
+    
+        self.AddExp(int(exp))
+
+    
 
     def __str__(self):
         PokeTypeString = ""

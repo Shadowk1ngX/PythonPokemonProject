@@ -33,7 +33,7 @@ while True:
 
         Player = PlayerObj(PlayerName, Game)
         Game.Update_Player(Player) #Update engine to have new player
-       # Game.Save_Game(Player)
+       # Game.Save_Game(Player) #Temp turn off saving
         Game.Update_GameMode("New")#Must be switched back so game continues as normal or else game mode will be set to load due to save function
 
         TypeingTextEffect.Type_Text_Effect("Welcome to Pokemon Text Adventures! Get ready for an exciting journey with your favorite Pokemon!",Game.TextSpeed)

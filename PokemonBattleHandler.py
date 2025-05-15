@@ -1,25 +1,43 @@
 import random
-
+import Gui
 
 def HandleBattle(Winner,Game,PlayerPokemon,PlayerAttack,EnemyPokemon,EnemyAttack): #Move atttack handling and death handling in pokemon class?
     if Winner == "Player":
-        PlayerAttackPower = PlayerAttack.Power
-        EnemyAttackPower = EnemyAttack.Power
 
-        EnemyPokemon.Health -= PlayerAttackPower
+        IsEnemyAlive = EnemyPokemon.TakeDamage(PlayerPokemon, PlayerAttack) #Enemy takes damage
+        Gui.UpdateHealthBar(PlayerPokemon, EnemyPokemon)
 
-        if EnemyPokemon.Health <= 0:
-            ...
+        if not IsEnemyAlive:
+            #print("Enemy Defeated!")
+            return True
         
-        PlayerAttack.Health -= EnemyAttackPower
-        
-        if PlayerPokemon.Health <= 0:
-            ...
+        IsPlayerAlive = PlayerPokemon.TakeDamage(EnemyPokemon, EnemyAttack)
+        if not IsPlayerAlive:
+            #print("Player Defeated!")
+            return False
 
     else:
-        ...
 
-def HandleAttackTurn(Game,PlayerPokemon,PlayerAttack,EnemyPokemon):
+        IsPlayerAlive = PlayerPokemon.TakeDamage(EnemyPokemon, EnemyAttack) #Player takes damage
+        Gui.UpdateHealthBar(PlayerPokemon, EnemyPokemon)
+        if not IsPlayerAlive:
+            #print("Player Defeated!")
+            return False
+
+        IsEnemyAlive = EnemyPokemon.TakeDamage(PlayerPokemon, PlayerAttack) 
+        if not IsEnemyAlive:
+            #print("Enemy Defeated!")
+            return True
+        
+
+def HandlePlayerBattleWin(Game,PlayerPokemon,EnemyPokemon,GuiRemoveFunction):
+    PlayerPokemon.CalculateExpReward(EnemyPokemon.BaseExp,EnemyPokemon.Level,PlayerPokemon.Level,is_trainer_battle = False)
+    GuiRemoveFunction()
+
+def HandlePlayerBattleLose(Game,PlayerPokemon,EnemyPokemon,GuiRemoveFunction):
+    GuiRemoveFunction()
+
+def HandleAttackTurn(Game,PlayerPokemon,PlayerAttack,PlayerHealthBar,PlayerHealthLabel,EnemyPokemon,EnemyHealthBar,EnemyHealthLabel,RemoveGuiFUnction):
     PlayerPokemonPriority = PlayerAttack.Priority
     EnemyAttack = random.choice(EnemyPokemon.Moves)()
 
@@ -32,16 +50,30 @@ def HandleAttackTurn(Game,PlayerPokemon,PlayerAttack,EnemyPokemon):
         if PlayerPokemonSpeed == EnemyPokemonSpeed: #if speed is the same then pick random to go first
             LuckyNumber = random.randint(0,1)
             if LuckyNumber == 1:
-                HandleBattle("Player",Game,PlayerPokemon,PlayerAttack,EnemyPokemon)
+                BattleOutcome = HandleBattle("Player",Game,PlayerPokemon,PlayerAttack,EnemyPokemon,EnemyAttack)
             else:
-                HandleBattle("Enemy",Game,PlayerPokemon,PlayerAttack,EnemyPokemon)
-
+               BattleOutcome = HandleBattle("Enemy",Game,PlayerPokemon,PlayerAttack,EnemyPokemon,EnemyAttack)
+            
         elif PlayerPokemonSpeed > EnemyPokemonSpeed:
-            HandleBattle("Player",Game,PlayerPokemon,PlayerAttack,EnemyPokemon)
+            BattleOutcome = HandleBattle("Player",Game,PlayerPokemon,PlayerAttack,EnemyPokemon,EnemyAttack)
         else:
-            HandleBattle("Enemy",Game,PlayerPokemon,PlayerAttack,EnemyPokemon)
+           BattleOutcome = HandleBattle("Enemy",Game,PlayerPokemon,PlayerAttack,EnemyPokemon,EnemyAttack)
+
+        if BattleOutcome == True:
+            HandlePlayerBattleWin(Game,PlayerPokemon,EnemyPokemon,RemoveGuiFUnction)
+        elif BattleOutcome == False:
+            HandlePlayerBattleLose(Game,PlayerPokemon,EnemyPokemon,RemoveGuiFUnction)
 
     elif PlayerPokemonPriority > EnemyPokemonPriority:
-        HandleBattle("Player",Game,PlayerPokemon,PlayerAttack,EnemyPokemon)
+        BattleOutcome = HandleBattle("Player",Game,PlayerPokemon,PlayerAttack,EnemyPokemon,EnemyAttack)
+        if BattleOutcome == True:
+            HandlePlayerBattleWin(Game,PlayerPokemon,EnemyPokemon,RemoveGuiFUnction)
+        elif BattleOutcome == False:
+            HandlePlayerBattleLose(Game,PlayerPokemon,EnemyPokemon,RemoveGuiFUnction)
+
     else:
-        HandleBattle("Enemy",Game,PlayerPokemon,PlayerAttack,EnemyPokemon)
+        BattleOutcome = HandleBattle("Enemy",Game,PlayerPokemon,PlayerAttack,EnemyPokemon,EnemyAttack)
+        if BattleOutcome == True:
+            HandlePlayerBattleWin(Game,PlayerPokemon,EnemyPokemon,RemoveGuiFUnction)
+        elif BattleOutcome == False:
+            HandlePlayerBattleLose(Game,PlayerPokemon,EnemyPokemon,RemoveGuiFUnction)

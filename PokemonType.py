@@ -28,12 +28,11 @@ Effectiveness = {
         ("Grass", "Fire"): .5,
         ("Grass", "Grass"): .5,
         ("Grass", "Dragon"): .5,
-          
     }   
 
 
-def GetEffectivenessMulitpier(Types):
-    Mulitplier = 1
-    for PokeType in Types:
-        pass
-        #if (PokeType().Type, 
+def GetEffectivenessMulitpier(AttackMoveType,DefenderPokeTypes):
+    multiplier = 1
+    for defender_type in DefenderPokeTypes:
+        multiplier *= Effectiveness.get((AttackMoveType, defender_type), 1)
+    return multiplier

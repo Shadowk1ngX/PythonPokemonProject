@@ -1,0 +1,3 @@
+FIXED     -Fix battle menu having diffrent health each time (Prob creating a new instance of a bulb. Grab from player invetory and be init inside of it?)
+-Change beggining text to all be gui based?
+- Stop enemy from attacking if they die and vice versa
